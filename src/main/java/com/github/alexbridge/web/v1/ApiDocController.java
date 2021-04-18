@@ -1,4 +1,4 @@
-package com.example.web.v2;
+package com.github.alexbridge.web.v1;
 
 import io.swagger.models.Swagger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,8 +24,8 @@ import springfox.documentation.swagger2.mappers.ServiceModelToSwagger2Mapper;
 
 import java.util.HashSet;
 
-@RestController("ApiDocVersion2")
-@RequestMapping("/v2")
+@RestController("ApiDocVersion1")
+@RequestMapping("/v1")
 @EnableSwagger2
 public class ApiDocController {
 
@@ -41,7 +41,7 @@ public class ApiDocController {
 	@RequestMapping(method= RequestMethod.GET)
 	public @ResponseBody ResponseEntity<Json> get() {
 
-		Documentation documentation = documentationCache.documentationByGroup("v2");
+		Documentation documentation = documentationCache.documentationByGroup("v1");
 		if (documentation == null) {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		}
@@ -49,11 +49,11 @@ public class ApiDocController {
 		return new ResponseEntity<>(jsonSerializer.toJson(swagger), HttpStatus.OK);
 	}
 
-	@Bean("Version2ApiDoc")
+	@Bean("Version1ApiDoc")
 	public Docket api() {
 		return new Docket(DocumentationType.SWAGGER_2)
 				.select()
-				.paths(PathSelectors.regex("/v2/messages.*"))
+				.paths(PathSelectors.regex("/v1/messages.*"))
 				.build()
 				.apiInfo(apiInfo())
 				.host("https://api.shopgate.services")
@@ -63,8 +63,7 @@ public class ApiDocController {
 				.consumes(new HashSet<>() {{
 					add("application/json");
 				}})
-				.groupName("v2");
-
+				.groupName("v1");
 	}
 
 	private ApiInfo apiInfo() {

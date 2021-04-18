@@ -6,16 +6,16 @@ This id a demo skeleton for RESTful java applications
 
 ENV variables needed:
 
-- `APP_PORT` : a port, that application run on
+- `APP_PORT`: a port, that application run on
 
 ### Run
 
-You can run it with IDE, `com.example.Application.main` as a start point
+You can run it with IDE, `com.github.alexbridge.Application.main` as a start point
  
 You can start from cli:
 
 - build project `gradle clean build`
-- run artifact `APP_PORT=8090 java -jar java-spring-skeleton-0.1.0.jar`
+- run artifact `APP_PORT=8090 java -jar java-spring-skeleton-1.0.0.jar`
 
 Implemented endpoints:
 
