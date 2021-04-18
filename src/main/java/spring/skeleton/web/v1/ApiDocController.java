@@ -1,4 +1,4 @@
-package com.example.web.v2;
+package spring.skeleton.web.v1;
 
 import io.swagger.models.Swagger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,11 +23,14 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 import springfox.documentation.swagger2.mappers.ServiceModelToSwagger2Mapper;
 
 import java.util.HashSet;
+import java.util.ResourceBundle;
 
-@RestController("ApiDocVersion2")
-@RequestMapping("/v2")
+@RestController("ApiDocVersion1")
+@RequestMapping("/v1")
 @EnableSwagger2
 public class ApiDocController {
+
+	private final ResourceBundle apiPropsBundle = ResourceBundle.getBundle("spring.skeleton.web.v1.api");
 
 	@Autowired
 	private DocumentationCache documentationCache;
@@ -41,7 +44,7 @@ public class ApiDocController {
 	@RequestMapping(method= RequestMethod.GET)
 	public @ResponseBody ResponseEntity<Json> get() {
 
-		Documentation documentation = documentationCache.documentationByGroup("v2");
+		Documentation documentation = documentationCache.documentationByGroup("v1");
 		if (documentation == null) {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		}
@@ -49,32 +52,31 @@ public class ApiDocController {
 		return new ResponseEntity<>(jsonSerializer.toJson(swagger), HttpStatus.OK);
 	}
 
-	@Bean("Version2ApiDoc")
+	@Bean("Version1ApiDoc")
 	public Docket api() {
 		return new Docket(DocumentationType.SWAGGER_2)
 				.select()
-				.paths(PathSelectors.regex("/v2/messages.*"))
+				.paths(PathSelectors.regex("/v1/messages.*"))
 				.build()
 				.apiInfo(apiInfo())
-				.host("https://api.shopgate.services")
+				.host(apiPropsBundle.getString("api.host"))
 				.produces(new HashSet<>() {{
 					add("application/json");
 				}})
 				.consumes(new HashSet<>() {{
 					add("application/json");
 				}})
-				.groupName("v2");
-
+				.groupName("v1");
 	}
 
 	private ApiInfo apiInfo() {
-		return new ApiInfoBuilder().title("JAVA Spring-boot blueprint")
-				.description("Blueprint of java spring-boot with demo REST controller")
+		return new ApiInfoBuilder().title(apiPropsBundle.getString("api.title"))
+				.description(apiPropsBundle.getString("api.desc"))
 				.contact(
 						new Contact(
-								"Shopgate Consumer Unit",
-								"https://api.shopgate.services",
-								"developer@shopgate.com"
+								apiPropsBundle.getString("contact.name"),
+								apiPropsBundle.getString("contact.url"),
+								apiPropsBundle.getString("contact.mail")
 						)
 				)
 				.version("1.0")

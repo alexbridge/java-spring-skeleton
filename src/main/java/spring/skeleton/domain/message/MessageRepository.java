@@ -1,7 +1,8 @@
-package com.example.domain.message;
+package spring.skeleton.domain.message;
 
 import java.util.HashMap;
 import java.util.Optional;
+import java.util.UUID;
 import java.util.stream.Stream;
 
 public class MessageRepository {
@@ -9,7 +10,9 @@ public class MessageRepository {
 	HashMap<String, Message> memory = new HashMap<>();
 
 	public Message add(Message message) {
-		message.setId(String.valueOf(message.hashCode()));
+		if (message.getId() == null) {
+			message.setId(UUID.randomUUID().toString());
+		}
 		memory.put(message.getId(), message);
 		return message;
 	}
@@ -24,8 +27,8 @@ public class MessageRepository {
 		return Optional.ofNullable(memory.get(id));
 	}
 
-	public void delete(String id) {
-		memory.remove(id);
+	public Optional<Message> delete(String id) {
+		return Optional.ofNullable(memory.remove(id));
 	}
 
 	public Stream<Message> getAll() {
