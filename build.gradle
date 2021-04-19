@@ -20,6 +20,12 @@ run {
     main = 'com.github.alexbridge.Application'
 }
 
+processResources {
+	from ('src/main/java') {
+		include '**/*.properties'
+	}
+}
+
 dependencies {
 	compile("org.springframework.boot:spring-boot-starter-web") {
 		exclude module: "spring-boot-starter-tomcat"

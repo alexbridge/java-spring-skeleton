@@ -23,11 +23,14 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 import springfox.documentation.swagger2.mappers.ServiceModelToSwagger2Mapper;
 
 import java.util.HashSet;
+import java.util.ResourceBundle;
 
 @RestController("ApiDocVersion2")
 @RequestMapping("/v2")
 @EnableSwagger2
 public class ApiDocController {
+
+	static private final ResourceBundle apiPropsBundle = ResourceBundle.getBundle("com.github.alexbridge.web.v2.api");
 
 	@Autowired
 	private DocumentationCache documentationCache;
@@ -56,7 +59,7 @@ public class ApiDocController {
 				.paths(PathSelectors.regex("/v2/messages.*"))
 				.build()
 				.apiInfo(apiInfo())
-				.host("https://api.shopgate.services")
+				.host(apiPropsBundle.getString("api.host"))
 				.produces(new HashSet<>() {{
 					add("application/json");
 				}})
@@ -68,13 +71,13 @@ public class ApiDocController {
 	}
 
 	private ApiInfo apiInfo() {
-		return new ApiInfoBuilder().title("JAVA Spring-boot blueprint")
-				.description("Blueprint of java spring-boot with demo REST controller")
+		return new ApiInfoBuilder().title(apiPropsBundle.getString("api.title"))
+				.description(apiPropsBundle.getString("api.desc"))
 				.contact(
 						new Contact(
-								"Shopgate Consumer Unit",
-								"https://api.shopgate.services",
-								"developer@shopgate.com"
+								apiPropsBundle.getString("contact.name"),
+								apiPropsBundle.getString("contact.url"),
+								apiPropsBundle.getString("contact.mail")
 						)
 				)
 				.version("1.0")
