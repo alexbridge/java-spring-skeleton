@@ -1,4 +1,4 @@
-package com.github.alexbridge.web.v2;
+package spring.skeleton.web.v2;
 
 import io.swagger.models.Swagger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,7 +30,7 @@ import java.util.ResourceBundle;
 @EnableSwagger2
 public class ApiDocController {
 
-	static private final ResourceBundle apiPropsBundle = ResourceBundle.getBundle("com.github.alexbridge.web.v2.api");
+	static private final ResourceBundle apiPropsBundle = ResourceBundle.getBundle("spring.skeleton.web.v2.api");
 
 	@Autowired
 	private DocumentationCache documentationCache;

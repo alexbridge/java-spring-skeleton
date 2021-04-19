@@ -1,6 +1,6 @@
-## Java skeleton application with spring framework
+## Java spring boot skeleton
 
-This id a demo skeleton for RESTful java applications
+This id a demo spring boot skeleton for RESTful java applications
 
 ### Config
 
@@ -10,25 +10,25 @@ ENV variables needed:
 
 ### Run
 
-You can run it with IDE, `com.github.alexbridge.Application.main` as a start point
+You can run it with IDE, `spring.skeleton.Application.main` as a start point
  
-You can start from cli:
+You can start from cli (see [Makefile](./Makefile) recipes):
 
-- build project `gradle clean build`
-- run artifact `APP_PORT=8090 java -jar java-spring-skeleton-1.0.0.jar`
+- build project `make`
+- run `make run`
 
 Implemented endpoints:
 
-- GET /messages - all message from repository
-- POST /messages - add new message to repository
-- GET /messages/{id} - get message by id, return 404 if not found
-- PUT /messages/{id} - update message by id, return 404 if not found
-- DELETE /messages/{id} - delete message by id, return 404 if not found
+- GET /v*/messages - all message from repository
+- POST /v*/messages - add new message to repository
+- GET /v*/messages/{id} - get message by id, return 404 if not found
+- PUT /v*/messages/{id} - update message by id, return 404 if not found
+- DELETE /v*/messages/{id} - delete message by id, return 404 if not found
 
-#### Performance
+#### Benchmarking
 
-You can check it with apache benchmark 
+You can check it with apache benchmark, see [Makefile](./Makefile) recipe `bench`
 
 ```shell
-    ab -n 10000 -c 100 http://localhost:8080/messages
+    make bench
 ```

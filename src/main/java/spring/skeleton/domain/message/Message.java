@@ -1,4 +1,4 @@
-package com.github.alexbridge.domain.message;
+package spring.skeleton.domain.message;
 
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;

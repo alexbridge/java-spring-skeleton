@@ -1,19 +1,20 @@
-package com.github.alexbridge.web.v2;
+package spring.skeleton.web.v1;
 
-import com.github.alexbridge.domain.message.Message;
-import com.github.alexbridge.domain.message.MessageNotFoundException;
-import com.github.alexbridge.domain.message.MessageRepository;
+import spring.skeleton.domain.message.Message;
+import spring.skeleton.domain.message.MessageNotFoundException;
+import spring.skeleton.domain.message.MessageRepository;
 import io.swagger.annotations.Api;
 import org.springframework.http.HttpStatus;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
-@RestController("MessagesV2")
-@RequestMapping("/v2/messages")
-@Api(value = "Messages V2", tags = "Messages Version 2")
+@RestController("MessagesV1")
+@RequestMapping("/v1/messages")
+@Api(value = "Messages V1", tags = "Messages Version 1")
 public class MessagesController {
 
     private MessageRepository repository = new MessageRepository();
@@ -38,7 +39,7 @@ public class MessagesController {
     }
 
     @RequestMapping(method= RequestMethod.POST)
-    public Message add(@RequestBody Message message) {
+    public Message add(@RequestBody @Validated Message message) {
         return repository.add(message);
     }
 
@@ -57,4 +58,5 @@ public class MessagesController {
                 delete(id).
                 orElseThrow(() -> new MessageNotFoundException(id));
     }
+
 }

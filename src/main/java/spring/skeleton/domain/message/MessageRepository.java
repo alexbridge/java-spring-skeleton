@@ -1,4 +1,4 @@
-package com.github.alexbridge.domain.message;
+package spring.skeleton.domain.message;
 
 import java.util.HashMap;
 import java.util.Optional;

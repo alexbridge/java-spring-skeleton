@@ -1,4 +1,4 @@
-package com.github.alexbridge.domain.message;
+package spring.skeleton.domain.message;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;
