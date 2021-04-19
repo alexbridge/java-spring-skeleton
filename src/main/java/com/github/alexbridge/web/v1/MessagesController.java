@@ -4,6 +4,7 @@ import com.github.alexbridge.domain.message.Message;
 import com.github.alexbridge.domain.message.MessageNotFoundException;
 import com.github.alexbridge.domain.message.MessageRepository;
 import io.swagger.annotations.Api;
+import org.springframework.http.HttpStatus;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -30,16 +31,16 @@ public class MessagesController {
                 .collect(Collectors.toList());
     }
 
-    @RequestMapping(method= RequestMethod.POST)
-    public Message add(@RequestBody @Validated Message message) {
-        return repository.add(message);
-    }
-
     @RequestMapping(path = "/{id}", method= RequestMethod.GET)
     public Message get(@PathVariable String id) {
         return repository
                 .get(id)
                 .orElseThrow(() -> new MessageNotFoundException(id));
+    }
+
+    @RequestMapping(method= RequestMethod.POST)
+    public Message add(@RequestBody @Validated Message message) {
+        return repository.add(message);
     }
 
     @RequestMapping(path = "/{id}", method= RequestMethod.PUT)
@@ -49,4 +50,13 @@ public class MessagesController {
                 .orElseThrow(() -> new MessageNotFoundException(id));
         return repository.update(id, message);
     }
+
+    @RequestMapping(path = "/{id}", method= RequestMethod.DELETE)
+    @ResponseStatus(code = HttpStatus.NO_CONTENT)
+    public Message delete(@PathVariable String id) {
+        return repository.
+                delete(id).
+                orElseThrow(() -> new MessageNotFoundException(id));
+    }
+
 }

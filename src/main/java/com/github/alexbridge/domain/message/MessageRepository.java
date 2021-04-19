@@ -10,7 +10,9 @@ public class MessageRepository {
 	HashMap<String, Message> memory = new HashMap<>();
 
 	public Message add(Message message) {
-		message.setId(UUID.randomUUID().toString());
+		if (message.getId() == null) {
+			message.setId(UUID.randomUUID().toString());
+		}
 		memory.put(message.getId(), message);
 		return message;
 	}

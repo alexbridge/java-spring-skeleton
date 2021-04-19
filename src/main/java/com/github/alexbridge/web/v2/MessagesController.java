@@ -30,16 +30,16 @@ public class MessagesController {
                 .collect(Collectors.toList());
     }
 
-    @RequestMapping(method= RequestMethod.POST)
-    public Message add(@RequestBody Message message) {
-        return repository.add(message);
-    }
-
     @RequestMapping(path = "/{id}", method= RequestMethod.GET)
     public Message get(@PathVariable String id) {
         return repository
                 .get(id)
                 .orElseThrow(() -> new MessageNotFoundException(id));
+    }
+
+    @RequestMapping(method= RequestMethod.POST)
+    public Message add(@RequestBody Message message) {
+        return repository.add(message);
     }
 
     @RequestMapping(path = "/{id}", method= RequestMethod.PUT)
@@ -52,11 +52,9 @@ public class MessagesController {
 
     @RequestMapping(path = "/{id}", method= RequestMethod.DELETE)
     @ResponseStatus(code = HttpStatus.NO_CONTENT)
-    public void delete(@PathVariable String id) {
-        repository
-                .get(id)
-                .orElseThrow(() -> new MessageNotFoundException(id));
-        repository.delete(id);
+    public Message delete(@PathVariable String id) {
+        return repository.
+                delete(id).
+                orElseThrow(() -> new MessageNotFoundException(id));
     }
-
 }

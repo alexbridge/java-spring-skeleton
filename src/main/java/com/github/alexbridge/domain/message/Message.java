@@ -3,7 +3,6 @@ package com.github.alexbridge.domain.message;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
-
 public class Message {
 
     private String id;
