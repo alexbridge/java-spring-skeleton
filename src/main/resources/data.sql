@@ -1,0 +1,1 @@
+INSERT INTO message(message) values("I am first message");
