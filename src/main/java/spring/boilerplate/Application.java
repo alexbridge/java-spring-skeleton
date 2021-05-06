@@ -1,4 +1,4 @@
-package spring.skeleton;
+package spring.boilerplate;
 
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
@@ -17,9 +17,7 @@ public class Application {
 		new SpringApplicationBuilder()
 				.sources(Application.class)
 				.properties(new HashMap<String, Object>() {{
-					put("spring.application.name", "Messages");
 					put("server.port", port);
-					put("spring.jackson.property-naming-strategy", "SNAKE_CASE");
 				}})
 				.run(args);
 	}

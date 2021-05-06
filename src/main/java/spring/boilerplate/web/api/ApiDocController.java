@@ -1,4 +1,4 @@
-package spring.skeleton.web.v1;
+package spring.boilerplate.web.api;
 
 import io.swagger.models.Swagger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,12 +25,12 @@ import springfox.documentation.swagger2.mappers.ServiceModelToSwagger2Mapper;
 import java.util.HashSet;
 import java.util.ResourceBundle;
 
-@RestController("ApiDocVersion1")
-@RequestMapping("/v1")
+@RestController("ApiDocController")
+@RequestMapping("/doc")
 @EnableSwagger2
 public class ApiDocController {
 
-	private final ResourceBundle apiPropsBundle = ResourceBundle.getBundle("spring.skeleton.web.v1.api");
+	private final ResourceBundle apiPropsBundle = ResourceBundle.getBundle("spring.boilerplate.web.api.api");
 
 	@Autowired
 	private DocumentationCache documentationCache;
@@ -44,7 +44,7 @@ public class ApiDocController {
 	@RequestMapping(method= RequestMethod.GET)
 	public @ResponseBody ResponseEntity<Json> get() {
 
-		Documentation documentation = documentationCache.documentationByGroup("v1");
+		Documentation documentation = documentationCache.documentationByGroup("api");
 		if (documentation == null) {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		}
@@ -52,11 +52,11 @@ public class ApiDocController {
 		return new ResponseEntity<>(jsonSerializer.toJson(swagger), HttpStatus.OK);
 	}
 
-	@Bean("Version1ApiDoc")
+	@Bean("ApiDoc")
 	public Docket api() {
 		return new Docket(DocumentationType.SWAGGER_2)
 				.select()
-				.paths(PathSelectors.regex("/v1/messages.*"))
+				.paths(PathSelectors.regex("/customers.*"))
 				.build()
 				.apiInfo(apiInfo())
 				.host(apiPropsBundle.getString("api.host"))
@@ -66,7 +66,7 @@ public class ApiDocController {
 				.consumes(new HashSet<>() {{
 					add("application/json");
 				}})
-				.groupName("v1");
+				.groupName("api");
 	}
 
 	private ApiInfo apiInfo() {

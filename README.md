@@ -1,6 +1,6 @@
-## Java spring boot skeleton
+## Java spring boot boilerplate
 
-This id a demo spring boot skeleton for RESTful java applications
+This id a demo spring boot boilerplate for RESTful java applications
 
 ### Config
 
@@ -10,7 +10,7 @@ ENV variables needed:
 
 ### Run
 
-You can run it with IDE, `spring.skeleton.Application.main` as a start point
+You can run it with IDE, `spring.boilerplate.Application.main` as a start point
  
 You can start from cli (see [Makefile](./Makefile) recipes):
 
@@ -19,11 +19,12 @@ You can start from cli (see [Makefile](./Makefile) recipes):
 
 Implemented endpoints:
 
-- GET /v*/messages - all message from repository
-- POST /v*/messages - add new message to repository
-- GET /v*/messages/{id} - get message by id, return 404 if not found
-- PUT /v*/messages/{id} - update message by id, return 404 if not found
-- DELETE /v*/messages/{id} - delete message by id, return 404 if not found
+- GET /customers - all customers from repository
+- POST /customers - add new customer to repository
+- GET /customers/{id} - get customer by id, return 404 if not found
+- PUT /customers/{id} - update customer by id, return 404 if not found
+- DELETE /customers/{id} - delete customer by id, return 404 if not found
+- GET /doc - swagger api documentation
 
 #### Benchmarking
 
