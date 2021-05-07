@@ -16,9 +16,10 @@ run-call: gradlew-build
 	sleep 20 &&
 	curl http://localhost:8090/customers &&
 	kill $$PID
+	rm customers.db
 
 kill-procs:
-	@ps -ef | grep 'java-spring-boilerplate' | grep -v grep | awk '{print $2}' | xargs kill
+	ps -ef | grep 'java-spring-boilerplate' | grep -v grep | awk '{print $2}' | xargs kill
 
 bench:
 	ab -n 10000 -c 100 http://localhost:8090/customers
